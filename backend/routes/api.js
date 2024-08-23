@@ -24,7 +24,7 @@ router.post('/auth/register', function (req, res) {
     res.json({message: "OK"})
 })
 
-router.post('/auth/login', function (req, res) {
+router.get('/auth/login', function (req, res) {
     const user = req.body.username
     const password = req.body.password
 
@@ -62,7 +62,7 @@ function authenticateToken(req, res, next) {
 }
 
 router.get('/protected', authenticateToken, (req, res) => {
-    // idk how and why this shit is working, idfc
+    // IDK how and why this shit is working, idfc
     console.log(req.user.username)
     res.json({ message: `Hello ${req.user.username}!` });
 })
