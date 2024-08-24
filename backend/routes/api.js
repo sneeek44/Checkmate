@@ -5,6 +5,7 @@ const router = express.Router();
 const database = require('../database');
 const {hashValue} = require("../utils/cryptonizing");
 const {checkPassword, doesUserExist} = require("../database");
+const authenticateToken = require("../utils/verifyToken");
 
 router.get("/", function (_req, res) {
     res.statusCode = 200;
@@ -46,23 +47,7 @@ router.post('/auth/login', function (req, res) {
     )
 })
 
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (token == null) {
-        return res.sendStatus(401);
-    }
-    jwt.verify(token, secret, (err, user) => {
-        if (err) {
-            return res.sendStatus(403);
-        }
-        req.user = user;
-        next();
-    });
-}
-
-router.get('/protected', authenticateToken, (req, res) => {
-    // IDK how and why this shit is working, idfc
+router.get('/dashboard', authenticateToken, (req, res) => {
     console.log(req.user.username)
     res.json({ message: `Hello ${req.user.username}!` });
 })

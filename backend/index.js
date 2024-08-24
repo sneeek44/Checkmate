@@ -2,6 +2,7 @@ const express = require('express')
 const database = require('./database')
 const api = require("./routes/api")
 const path = require("node:path");
+const authenticateToken = require("./utils/verifyToken");
 
 const port = process.env.PORT || 8080
 
@@ -19,6 +20,11 @@ app.get('/ru', function (_req, res) {
 })
 app.get('/login', function (req, res) {
     res.render('pages/login')
+})
+
+// POST because GET does not accept body
+app.post('/dashboard', authenticateToken, function (req, res) {
+    res.render('pages/dashboard')
 })
 
 app.listen(port, () => {

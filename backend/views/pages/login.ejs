@@ -82,7 +82,8 @@
                     }
                 } else if (statusCode === 200) {
                     alert('Right password!');
-                    // todo: grab jwt and redirect
+                    const token = json.token;
+                    localStorage.setItem('token', token);
                 } else {
                     alert("Something went wrong...");
                 }
