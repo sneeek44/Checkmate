@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Checkmates</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        body {
+            font-family: "Jua", sans-serif;
+            background-color: #344E41;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .wrapper {
+            height: 100vh;
+            width: 80vw;
+        }
+        #language-selector {
+            display: flex;
+            float: right;
+            align-items: center;
+        }
+        #language-selector * {
+            display: inline-block;
+            margin: 0;
+        }
+        #language-selector h5 {
+            font-size: medium;
+        }
+        /*buttons are pretty... special*/
+        button {
+            font-family: "Jua", sans-serif;
+            width: 20vw;
+            margin: 20px 0 20px 0;
+            height: 4vh;
+            border-radius: 18px;
+            border: none;
+        }
+        #left {
+            display: inline-block;
+        }
+        #right {
+            display: inline-block;
+        }
+        #right button {
+            /*fixme: button must be bright color*/
+            /*nahuya eto fixit i tak rabotaet lol*/
+            /*background-color: #FEFAE0;*/
+        }
+        #poo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #left p {
+            font-size: larger;
+            width: 50vh;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div id="language-selector">
+        <button style="margin: 0; width: 5vw" onclick="ruVersion()">
+            🇷🇺 ru version
+        </button>
+    </div>
+    <div>
+        <img src="/images/logo.png">
+    </div>
+    <div id="poo">
+        <div id="left">
+            <p>
+                On this site you can play free chess with your friends
+                or absolutely any person online! Everything is free,
+                including server availability up to 32%...
+            </p>
+            <p>
+                It is open-source pet project, if you want
+                to contribute - check out GitHub page! Have fun!
+            </p>
+            <p>
+                Don't know anything about chess? No problem!
+                Learn the rules of the game in this free source.
+            </p>
+        </div>
+        <div id="right">
+            <button id="sign-in" onclick="redirToSignIn()">Sign in</button><br>
+            <button id="sign-up" onclick="redirToRegister()">Sign up</button><br>
+            <button id="learn" onclick="redirToLearn()">Start learning</button>
+        </div>
+    </div>
+</div>
+<script>
+function redirToSignIn() {
+    window.location.href = '/login'
+}
+function redirToRegister() {
+    window.location.href = '/register'
+}
+function redirToLearn() {
+    location.href = 'https://lichess.org/en/learn'
+}
+function ruVersion() {
+    window.location.href = '/ru'
+}
+</script>
+</body>
+</html>

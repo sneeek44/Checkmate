@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Checkmates</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+        body {
+            font-family: "Russo One", sans-serif;
+            background-color: #344E41;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .wrapper {
+            height: 100vh;
+            width: 80vw;
+        }
+        #language-selector {
+            display: flex;
+            float: right;
+            align-items: center;
+        }
+        #language-selector * {
+            display: inline-block;
+            margin: 0;
+        }
+        #language-selector h5 {
+            font-size: medium;
+        }
+        /*buttons are pretty... special*/
+        button {
+            font-family: "Russo One", sans-serif;
+            width: 20vw;
+            margin: 20px 0 20px 0;
+            height: 4vh;
+            border-radius: 18px;
+            border: none;
+        }
+        #left {
+            display: inline-block;
+        }
+        #right {
+            display: inline-block;
+        }
+        #right button {
+            /*fixme: button must be bright color*/
+            /*nahuya eto fixit i tak rabotaet lol*/
+            /*background-color: #FEFAE0;*/
+        }
+        #poo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #left p {
+            font-size: larger;
+            width: 50vh;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div id="language-selector">
+        <button style="margin: 0; width: 5vw" onclick="enVersion()">
+            🇺🇸 en version
+        </button>
+    </div>
+    <div>
+        <img src="/images/logo.png">
+    </div>
+    <div id="poo">
+        <div id="left">
+            <p>
+                На этом сайте можно поиграть в шахматы как с другом,
+                так и абсолютно со случайным человеком. Все
+                полностью бесплатно, включая доступность сервера до 32%!
+            </p>
+            <p>
+                Это маленький проект с открытым исходным кодом, если
+                хотите внести вклад - посмотрите GitHub репозиторий.
+            </p>
+            <p>
+                Ничего не знаете о шахматах? Не беда, на этом бесплатном
+                сайте вы сможете узнать основы игры!
+            </p>
+        </div>
+        <div id="right">
+            <button id="sign-in" onclick="redirToSignIn()">Войти</button><br>
+            <button id="sign-up" onclick="redirToRegister()">Зарегистрироваться</button><br>
+            <button id="learn" onclick="redirToLearn()">Узнать больше об игре</button>
+        </div>
+    </div>
+</div>
+<script>
+function redirToSignIn() {
+    window.location.href = '/ru/login'
+}
+function redirToRegister() {
+    window.location.href = '/ru/register'
+}
+function redirToLearn() {
+    location.href = 'https://lichess.org/learn'
+}
+function enVersion() {
+    window.location.href = '/'
+}
+</script>
+</body>
+</html>

@@ -8,10 +8,17 @@ const port = process.env.PORT || 8080
 const app = express()
 app.use(express.json())
 app.use("/api", api)
+app.use(express.static('public'))
+app.set('view engine', 'ejs')
 
-app.use(express.static(path.join(__dirname, 'dist')))
-app.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+app.get('/', function(_req, res) {
+    res.render('pages/home')
+})
+app.get('/ru', function (_req, res) {
+    res.render('pages/ru/home')
+})
+app.get('/login', function (req, res) {
+    res.render('pages/login')
 })
 
 app.listen(port, () => {
