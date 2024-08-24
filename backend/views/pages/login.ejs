@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Login to Checkmates</title>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        body {
+            font-family: "Jua", sans-serif;
+            margin: 0;
+        }
+        #bg {
+            background-color: #344E41;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #login {
+            background-color: #FEFAE0;
+            border-radius: 18px;
+            width: 20vw;
+            height: 23vh;
+        }#login * {color:#283618;text-align: center;}
+         #login_btn {
+             width: 6vw;
+             height: 5vh;
+             border-radius: 18px;
+             border: none;
+             background-color: #283618;
+             color: #FEFAE0;
+             font-family: "Jua", sans-serif;
+         }
+    </style>
+</head>
+<body>
+    <div id="bg">
+        <div id="login">
+            <h1 style="margin-top:5px; margin-bottom: 10px">Login</h1>
+            <div>
+                <label for="username">Username:</label>
+                <br>
+                <input type="text" id="username">
+                <br>
+                <label for="password">Password:</label>
+                <br>
+                <input type="password" id="password">
+            </div>
+            <div style="margin-top: 15px">
+                <button id="login_btn" onclick="loginClick()">Go!</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        async function loginClick() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                alert("Username and password must not be empty!");
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username: username, password: password })
+                });
+
+                const json = await response.json();
+                const statusCode = response.status;
+
+                if (statusCode === 418) {
+                    if (json.message === "wrong password") {
+                        alert("Wrong password! Please, try again.")
+                    } else {
+                        alert("This user does not exist. Seems that you need to register your account.")
+                    }
+                } else if (statusCode === 200) {
+                    alert('Right password!');
+                    // todo: grab jwt and redirect
+                } else {
+                    alert("Something went wrong...");
+                }
+            } catch (error) {
+                alert('Error happened, maybe the server is offline, I am gonna ping it right now');
+                try {
+                    const response = await fetch('/api');
+                    if (!response.ok) {
+                        alert("Server is not responding.");
+                    } else {
+                        alert("Seems we are having troubles with authorization right now.");
+                    }
+                } catch (error) {
+                    alert("Server is dead. womp womp");
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -24,13 +24,13 @@ router.post('/auth/register', function (req, res) {
     res.json({message: "OK"})
 })
 
-router.get('/auth/login', function (req, res) {
+router.post('/auth/login', function (req, res) {
     const user = req.body.username
     const password = req.body.password
-
     checkPassword(user, password).then(r => {
             if (r) {
-                const token = jwt.sign({user: user}, secret, {expiresIn: '10m'})
+                const token = jwt.sign({user: user}, secret, {expiresIn: '12h'})
+                res.statusCode = 200
                 res.json({token})
             } else {
                 res.statusCode = 418
